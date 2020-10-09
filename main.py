@@ -9,10 +9,10 @@ h = aspect_ratio * w * 0.5
 img = img.resize((w, int(h)))
 img = img.convert('L')
 bwdata = img.getdata()
-chars = ["0", "1"]
+chars = ["0", "1", "2"]
 
 text = ""
-div = 255//2
+div = 255//len(chars)
 for line_no in range(int(h)):
     for p in range(line_no*w, line_no*w + w):
         try:
