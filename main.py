@@ -11,6 +11,15 @@ img = img.convert('L')
 bwdata = img.getdata()
 chars = ["0", "1", "2"]
 
+
+def binary_to_decimal(binary):
+        decimal = 0
+        l = len(binary)
+        for x in binary:
+            l -= 1
+            decimal += pow(2, l) * int(x)
+        return int(decimal)
+
 text = ""
 div = 255//len(chars)
 for line_no in range(int(h)):
