@@ -3,10 +3,18 @@ from PIL import Image
 img = Image.open("img.png")
 
 w, h = img.size
-aspect_ratio = h/w
-w = 120
-h = aspect_ratio * w * 0.5
-img = img.resize((w, int(h)))
+
+def set_dim(width=0, height=0):
+    global w, h, img
+    if width == 0 and height != 0:
+        w, h = int(w/h * height), height * 0.5
+    elif width != 0 and height == 0:
+        w, h = width, int(h/w * width * 0.5) 
+    else:
+        w, h = width, height
+    img = img.resize((w, h))
+
+set_dim(80)
 img = img.convert('L')
 bwdata = img.getdata()
 chars = ["0", "1", "2"]
