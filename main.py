@@ -15,8 +15,8 @@ def set_dim(width=0, height=0):
     img = img.resize((w, h))
 
 set_dim(80)
-img = img.convert('L')
-bwdata = img.getdata()
+bwimg = img.convert('L')
+bwdata = bwimg.getdata()
 chars = ["0", "1", "2"]
 
 
@@ -38,5 +38,21 @@ for line_no in range(int(h)):
             print(bwdata[p], div)
     text += '\n'
 
+def span(integer, integer_colour):
+        return f"<span style='color: rgb{integer_colour};'><b>{integer}</b></span>"
+
+def colour_image():
+    color = img.getdata()
+    output = '<p>'
+    for line_no in range(h):
+        for pixel in range(line_no*w, line_no*w + w):
+            output += span(text[pixel], color[pixel])
+        output += '<br>'
+    output += "</p>"
+    return output
+
 with open("text.txt", "w") as file:
     file.write(text)
+
+with open("output.html", "w") as file:
+     file.write(colour_image())
