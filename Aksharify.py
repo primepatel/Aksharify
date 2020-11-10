@@ -6,6 +6,7 @@ class AsciiArt:
         self.w, self.h = self.image.size
         self.ascii_chars = list('01')
         self.ascii_text = ''
+        self.number = ""
 
     def set_dim(self, width=0, hight=0):
         if width == 0 and hight != 0:
@@ -35,6 +36,19 @@ class AsciiArt:
                 self.ascii_text += self.ascii_chars[bwdata[pixel]//div -1]
             self.ascii_text += '\n'
     
+    def numberize(self, first_char=1):
+        div, number = 255//len(self.ascii_chars), ''
+        bwdata = self.image.convert('L').getdata()
+        for line_no in range(self.h):
+            for pixel in range(line_no*self.w, line_no*self.w + self.w):
+                number += self.ascii_chars[bwdata[pixel]//div - 1]
+                self.ascii_text += self.ascii_chars[bwdata[pixel]//div - 1]
+            self.ascii_text += '\n'
+        if number[0] == "0":
+            number = str(first_char) + number[1:]
+        self.number = number
+        return self.number
+    
     def ascii_show(self):
         print(self.ascii_text[:-1])
 
@@ -42,3 +56,4 @@ art = AsciiArt("img.png")
 art.set_dim(40)
 art.asciify()
 art.ascii_show()
+print(art.numberize())
