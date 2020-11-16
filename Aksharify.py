@@ -52,8 +52,13 @@ class AsciiArt:
     def ascii_show(self):
         print(self.ascii_text[:-1])
 
+    def text_output(self, fname):
+        with open(fname, "w") as file:
+            file.write(self.ascii_text)
+
 art = AsciiArt("img.png")
-art.set_dim(40)
+art.set_dim(20)
 art.asciify()
 art.ascii_show()
 print(art.numberize())
+art.text_output("text.txt")
