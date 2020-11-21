@@ -49,6 +49,14 @@ class AsciiArt:
         self.number = number
         return self.number
     
+    def primify(self, prime, binary=False):
+        if binary and len(bin(int(prime))) == len(bin(self.number)):
+            self.number = bin(int(prime))
+        elif len(str(int(prime))) == len(str(self.number)):
+            self.number = str(prime)
+        else:
+            print("not primified")
+    
     def ascii_show(self):
         print(self.ascii_text[:-1])
 
@@ -59,6 +67,4 @@ class AsciiArt:
 art = AsciiArt("img.png")
 art.set_dim(20)
 art.asciify()
-art.ascii_show()
-print(art.numberize())
-art.text_output("text.txt")
+art.primify(int(art.numberize()) + 1)
