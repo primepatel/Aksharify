@@ -57,6 +57,13 @@ class AsciiArt:
         else:
             print("not primified")
     
+    def prime_asciify(self):
+        self.ascii_text = ""
+        for line in range(self.h):
+            for dig in range(line*self.w, line*self.w + self.w):
+                self.ascii_text += self.number[dig]
+            self.ascii_text += '\n'
+    
     def ascii_show(self):
         print(self.ascii_text[:-1])
 
@@ -67,4 +74,9 @@ class AsciiArt:
 art = AsciiArt("img.png")
 art.set_dim(20)
 art.asciify()
+art.ascii_show()
+print()
 art.primify(int(art.numberize()) + 1)
+art.prime_asciify()
+art.ascii_show()
+art.text_output("text.txt")
