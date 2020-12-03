@@ -7,6 +7,7 @@ class AsciiArt:
         self.ascii_chars = list('01')
         self.ascii_text = ''
         self.number = ""
+        self.ascii_html = ''
 
     def set_dim(self, width=0, hight=0):
         if width == 0 and hight != 0:
@@ -64,6 +65,22 @@ class AsciiArt:
                 self.ascii_text += self.number[dig]
             self.ascii_text += '\n'
     
+    def colorify(self):
+        color = self.image.getdata()
+        file = '<p>'
+        if self.number[:2] != "0b":
+            for line_no in range(self.h):
+                for pixel in range(line_no*self.w, line_no*self.w + self.w):
+                    file += self.span(self.number[pixel], color[pixel])
+                file += '<br>'
+        else:
+            for line_no in range(self.h):
+                for pixel in range(line_no*self.w, line_no*self.w + self.w):
+                    file += self.span(self.number[2+pixel], color[pixel])
+                file += '<br>'
+        file += "</p>"
+        self.ascii_html = file
+    
     def ascii_show(self):
         print(self.ascii_text[:-1])
 
@@ -80,3 +97,4 @@ art.primify(int(art.numberize()) + 1)
 art.prime_asciify()
 art.ascii_show()
 art.text_output("text.txt")
+art.colorify()
