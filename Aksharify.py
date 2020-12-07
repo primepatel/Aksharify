@@ -87,6 +87,10 @@ class AsciiArt:
     def text_output(self, fname):
         with open(fname, "w") as file:
             file.write(self.ascii_text)
+    
+    def color_output(self, fname):
+        with open(fname, "w") as file:
+            file.write(self.ascii_html)
 
 art = AsciiArt("img.png")
 art.set_dim(20)
@@ -98,3 +102,4 @@ art.prime_asciify()
 art.ascii_show()
 art.text_output("text.txt")
 art.colorify()
+art.color_output("output.html")
